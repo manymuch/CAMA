@@ -1,0 +1,7 @@
+PyYAML
+tqdm
+numpy
+scipy
+opencv-python
+ffmpeg-python
+nuscenes-devkit
