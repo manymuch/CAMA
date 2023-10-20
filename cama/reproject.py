@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from os.path import join
-from horizon_driving_dataset import DatasetReader
+from cama.dataset_reader import DatasetReader
 
 
 class BaseManager:

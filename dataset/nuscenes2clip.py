@@ -716,8 +716,8 @@ if __name__ == '__main__':
 
     configs = dict()
     configs["version"] = 'v1.0-test'
-    configs["dataroot"] = '/horizon-bucket/aidi_public_data/nuScenes/origin/'
-    configs["converted_dataroot"] = '/horizon-bucket/4DLABEL/users/jiaxin02.zhang/converted_nuscenes'
+    configs["dataroot"] = 'xxx/nuScenes/origin/'
+    configs["converted_dataroot"] = 'xxx/converted_nuscenes'
     configs["map_classes"] = ['lane_marking', 'Road_teeth', 'Crosswalk_Line']
     configs["cama_configs"] = dict()
     configs["cama_configs"]["result_dir"] = "maps"

@@ -2,7 +2,8 @@ import numpy as np
 from os.path import join, exists
 
 from tqdm import tqdm
-from horizon_driving_dataset import DatasetReader, PoseTransformer
+from cama.dataset_reader import DatasetReader
+from cama.pose_transformer import PoseTransformer
 from cama.reproject import MapManager, CameraManager
 from cama.tools import load_json
 
