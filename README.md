@@ -7,6 +7,7 @@ Official Implementation of A Vision-Centric Approach for Static Map Element Anno
   <img src="assets/cover.jpeg" width="70%"/>
 </p>
 
+CAMA is also used for detecting drowsiness driving patterns based on static map element matching. For instance, our proposed driving behavior dataset CAMA-D. Details here (https://github.com/FatigueView/fatigueview)
 ## Pipeline
 <p align="left">
   <img src="assets/pipeline.png" width="70%"/>
@@ -29,10 +30,20 @@ Official Implementation of A Vision-Centric Approach for Static Map Element Anno
     * **dataroot**: path to the origin nuScenes dataset  
     * **converted_dataroot**: output converted dataset dir  
     * **cama_label_file**: path to cama_label.zip you just download from 2  
-    * **output_video_dir**: where the demo video writes  
-
+    * **output_video_dir**: where the demo video writes
 4. Run the pipeline  
     ```bash
     python3 main.py --config config.yaml
     ```
+
+## Citation
+
+If you benefit from this work, please cite the mentioned and our paper:
+
+    @inproceedings{zhang2021deep,
+      title={A Vision-Centric Approach for Static Map Element Annotation},
+      author={Zhang, Jiaxin and Chen, Shiyuan and Yin, Haoran and Mei, Ruohong and Liu, Xuan and Yang, Cong and Zhang, Qian and Sui, Wei},
+      booktitle={IEEE International Conference on Robotics and Automation (ICRA 2024)},
+      pages={1-7}
+    }
 
