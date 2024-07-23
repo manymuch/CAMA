@@ -14,7 +14,7 @@ CAMA is also used for detecting drowsiness driving patterns based on static map 
 </p>
 
 ## Release Notes  
-### 1.0.0 (2012-10-13)  
+### 1.0.0 (2023-10-13)  
 * Upload nuScenes xxx scenes from v1.0-test with CAMA labels.  
 * Add reprojection demo for both CAMA and nuScenes origin labels.  
 
