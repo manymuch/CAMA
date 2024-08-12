@@ -1,7 +1,7 @@
 # CAMA
 Official Implementation of A Vision-Centric Approach for Static Map Element Annotation  
 CAMA： [Arxiv](https://arxiv.org/abs/2309.11754) | [Youtube](https://www.youtube.com/watch?v=oBa4ngd2b9Y) | [Bilibili](https://www.bilibili.com/video/BV1ek4y1F7nJ)  
-CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.youtube.com/watch?v=npbbOEpuTno)
+CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.youtube.com/watch?v=npbbOEpuTno) | [Bilibili](https://www.bilibili.com/video/BV1afeFeAEsg)
 
 **CAMA**: **C**onsistent and **A**ccurate **M**ap **A**nnotation, nuScenes example:  
 <p align="left">
@@ -16,7 +16,8 @@ CAMA is also used for detecting drowsiness driving patterns based on static map 
 
 ## Release Notes  
 ### 2.0.0 (2024-07-31)
-* We release CAMAv2 on [Arxiv](https://arxiv.org/abs/2407.21331). CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**.
+* We release CAMAv2 on [Arxiv](https://arxiv.org/abs/2407.21331). CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**, which solves the shortcoming of dropping the head and tail
+frames in the previous single-scene reconstruction and the occlusion and blind zone problems
 * Upload nuScenes xxx scenes from v1.0-trainval with CAMA labels.
 ### 1.0.0 (2023-10-13)  
 * Upload nuScenes xxx scenes from v1.0-test with CAMA labels.  
@@ -51,10 +52,11 @@ If you benefit from this work, please cite the mentioned and our paper:
       pages={1-7}
     }
 
-  @article{chen2024camav2,
-    title={CAMAv2: A Vision-Centric Approach for Static Map Element Annotation},
-    author={Chen, Shiyuan and Zhang, Jiaxin and Mei, Ruohong and Cai, Yingfeng and Yin, Haoran and Chen, Tao and Sui, Wei and Yang, Cong},
-    journal={arXiv preprint arXiv:2407.21331},
-    year={2024}
-  }
+    @article{chen2024camav2,
+      title={CAMAv2: A Vision-Centric Approach for Static Map Element Annotation},
+      author={Chen, Shiyuan and Zhang, Jiaxin and Mei, Ruohong and Cai, Yingfeng and Yin, Haoran and Chen, Tao and Sui, Wei and Yang, Cong},
+      journal={arXiv preprint arXiv:2407.21331},
+      year={2024}
+    }
+  
 
