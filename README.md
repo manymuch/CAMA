@@ -1,7 +1,7 @@
 # CAMA
 Official Implementation of A Vision-Centric Approach for Static Map Element Annotation  
-[Arxiv](https://arxiv.org/abs/2309.11754) | [Youtube](https://www.youtube.com/watch?v=oBa4ngd2b9Y) | [Bilibili](https://www.bilibili.com/video/BV1ek4y1F7nJ)  
-
+CAMA： [Arxiv](https://arxiv.org/abs/2309.11754) | [Youtube](https://www.youtube.com/watch?v=oBa4ngd2b9Y) | [Bilibili](https://www.bilibili.com/video/BV1ek4y1F7nJ)  
+CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.youtube.com/watch?v=npbbOEpuTno) |
 **CAMA**: **C**onsistent and **A**ccurate **M**ap **A**nnotation, nuScenes example:  
 <p align="left">
   <img src="assets/cover.jpeg" width="70%"/>
@@ -10,10 +10,13 @@ Official Implementation of A Vision-Centric Approach for Static Map Element Anno
 CAMA is also used for detecting drowsiness driving patterns based on static map element matching. For instance, our proposed driving behavior dataset CAMA-D. Details here (https://github.com/FatigueView/fatigueview)
 ## Pipeline
 <p align="left">
-  <img src="assets/pipeline.png" width="70%"/>
+  <img src="assets/pipeline.jpg" width="70%"/>
 </p>
 
 ## Release Notes  
+### 2.0.0 (2024-07-31)
+* We release CAMAv2 on [Arxiv](https://arxiv.org/abs/2407.21331). CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**. Site reconstruction utilizes more observations to reconstruct the same location, which solves the shortcoming of dropping the head and tail frames in the previous single-scene reconstruction and the occlusion and blind zone problems.
+* Upload nuScenes xxx scenes from v1.0-trainval with CAMA labels.
 ### 1.0.0 (2023-10-13)  
 * Upload nuScenes xxx scenes from v1.0-test with CAMA labels.  
 * Add reprojection demo for both CAMA and nuScenes origin labels.  
@@ -46,4 +49,11 @@ If you benefit from this work, please cite the mentioned and our paper:
       booktitle={IEEE International Conference on Robotics and Automation (ICRA 2024)},
       pages={1-7}
     }
+
+  @article{chen2024camav2,
+    title={CAMAv2: A Vision-Centric Approach for Static Map Element Annotation},
+    author={Chen, Shiyuan and Zhang, Jiaxin and Mei, Ruohong and Cai, Yingfeng and Yin, Haoran and Chen, Tao and Sui, Wei and Yang, Cong},
+    journal={arXiv preprint arXiv:2407.21331},
+    year={2024}
+  }
 
