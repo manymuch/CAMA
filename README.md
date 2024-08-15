@@ -18,7 +18,7 @@ CAMA is also used for detecting drowsiness driving patterns based on static map 
 ### 2.0.0 (2024-07-31)
 * We release CAMAv2 on [Arxiv](https://arxiv.org/abs/2407.21331). CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**, which solves the shortcoming of dropping the head and tail
 frames in the previous single-scene reconstruction and the occlusion and blind zone problems
-* Upload nuScenes xxx scenes from v1.0-trainval with CAMA labels.
+* Upload camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)] with **site** reconstruction.
 ### 1.0.0 (2023-10-13)  
 * Upload nuScenes xxx scenes from v1.0-test with CAMA labels.  
 * Add reprojection demo for both CAMA and nuScenes origin labels.  
