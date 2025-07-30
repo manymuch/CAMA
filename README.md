@@ -8,7 +8,6 @@ CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.yout
   <img src="assets/cover.jpeg" width="70%"/>
 </p>
 
-CAMA is also used for detecting drowsiness driving patterns based on static map element matching. For instance, our proposed driving behavior dataset CAMA-D. Details here (https://github.com/FatigueView/fatigueview)
 ## Pipeline
 <p align="left">
   <img src="assets/pipeline.jpg" width="70%"/>
@@ -16,12 +15,14 @@ CAMA is also used for detecting drowsiness driving patterns based on static map 
 
 ## Release Notes  
 ### 2.0.0 (2024-07-31)
-* We release CAMAv2 on [Arxiv](https://arxiv.org/abs/2407.21331). CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**, which solves the shortcoming of dropping the head and tail
-frames in the previous single-scene reconstruction and the occlusion and blind zone problems
-* Upload camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)] with **site** reconstruction.
+* camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
+* CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**.
+* It solves the shortcoming of dropping head and tail frames in camav1.
 ### 1.0.0 (2023-10-13)  
-* Upload nuScenes xxx scenes from v1.0-test with CAMA labels.  
+* cama_label.zip [[Google Drive](https://drive.google.com/file/d/1QUae0pMtXxfGCzjprN1_cKuXdjD854Qj/view?usp=sharing)]  
+* Upload nuScenes 73 scenes from v1.0-test with CAMA labels.  
 * Add reprojection demo for both CAMA and nuScenes origin labels.  
+* **Note**: if using this older version, change ``self.map_width`` and ``self.map_height`` to 300 in [reproject.py](https://github.com/manymuch/CAMA/blob/main/cama/reproject.py#L26)
 
 ## Run: Reprojection Demo  
 
@@ -29,7 +30,7 @@ frames in the previous single-scene reconstruction and the occlusion and blind z
     ```bash
     python3 -m pip install -r requirements.txt  
     ```
-2. Download cama_label.zip [[Google Drive](https://drive.google.com/file/d/1QUae0pMtXxfGCzjprN1_cKuXdjD854Qj/view?usp=sharing)]  
+2. Download camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
 
 3. Modify config.yaml accordingly:  
     * **dataroot**: path to the origin nuScenes dataset  
