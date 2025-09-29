@@ -18,13 +18,16 @@ class BaseManager:
 
 
 class MapManager(BaseManager):
-    def __init__(self,):
+    def __init__(self, pose_prefix=None):
         super(MapManager, self).__init__()
         self.solution = 0.1  # meter per pixel
         self.center_x = 0  # meter
         self.center_y = 0  # meter
-        self.map_width = 600  # meter
-        self.map_height = 600  # meter
+        self.map_width = 300  # meter
+        self.map_height = 300  # meter
+        if pose_prefix == 'mcmv':
+            self.map_width = 600  # meter
+            self.map_height = 600  # meter
         self.crop_dict = {}
         self.crop_dict["x_min"] = -50
         self.crop_dict["x_max"] = 50

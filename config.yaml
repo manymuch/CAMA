@@ -1,18 +1,16 @@
-# nuScenes data version, v1.0-test, v1.0-val, v1.0-train
+# nuScenes data version, v1.0-test, v1.0-trainval
 version: "v1.0-test"
 # original nuScenes dataset root
 dataroot: "***/nuScenes/origin"
 # converted new data output root
-converted_dataroot: "***/converted_test_1"
+converted_dataroot: "camav2_label/all_clips"
 # nuScenes scene_name to be processed
 scene_names: ["scene-0550", ]
-# cama label file path
-cama_label_file: "**/cama_label.zip"
 # output video dir
 output_video_dir: "**/output" 
 # leave unchanged
 map_classes: ['lane_marking', 'Road_teeth', 'Crosswalk_Line']
-
+compute_metrics: False
 
 # cama configs, leave unchanged
 cama_configs:
@@ -20,6 +18,5 @@ cama_configs:
   camera_list: ["camera_front_left", "camera_front", "camera_front_right", "camera_rear_left", "camera_rear", "camera_rear_right"]
   camera_main: "camera_front"
   height_mlp: "vision_road_mlp_ft.npy"
-  pose_prefix: "scmv"
   cama_map_file: "map_labels.json"
   nuscenes_map_file: "map_nuscenes.json"

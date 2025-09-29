@@ -5,3 +5,4 @@ scipy
 opencv-python
 ffmpeg-python
 nuscenes-devkit
+scikit-image

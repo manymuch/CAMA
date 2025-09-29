@@ -549,9 +549,7 @@ class nuScenes2Clip:
                     shutil.copy(sensor_path, os.path.join(view_path, str(round(sd['timestamp'] / 1000)) + '.jpg'))
                 # lidar_top
                 else:
-                    pointcloud = np.fromfile(sensor_path, dtype=np.double, count=-1).reshape([-1, 4])
-                    pointcloud = np.hstack([pointcloud, np.zeros((pointcloud.shape[0], 2))])
-                    pointcloud.tofile(os.path.join(view_path, str(round(sd['timestamp'] / 1000)) + '.bin'))
+                    shutil.copy(sensor_path, os.path.join(view_path, f"{round(sd['timestamp']/1000)}.pcd.bin"))
                 unsync[self.clip_sensor_names[index]].append(round(sd['timestamp'] / 1000))
             logger.info("Done {}".format(sensor_name))
         return unsync

@@ -13,16 +13,72 @@ CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.yout
   <img src="assets/pipeline.jpg" width="70%"/>
 </p>
 
-## Release Notes  
+## Release Notes
+Please run ```git checkout camav2``` to switch to camav2 branch.
+### 2.1.0 (2025-09-29)
+* Release the evaluation scripts (SRE, precision, recall, F1-score).
+* Add LiDAR aggregation demo using CAMAv2 reconstructed poses.
 ### 2.0.0 (2024-07-31)
-* camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
+* camav2_label.zip [[Google Drive](https://drive.google.com/file/d/1zRZIB7BHKS_6sbC8oBA1mFe9_eaTMPs5/view?usp=sharing)]
 * CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**.
 * It solves the shortcoming of dropping head and tail frames in camav1.
 ### 1.0.0 (2023-10-13)  
 * cama_label.zip [[Google Drive](https://drive.google.com/file/d/1QUae0pMtXxfGCzjprN1_cKuXdjD854Qj/view?usp=sharing)]  
 * Upload nuScenes 73 scenes from v1.0-test with CAMA labels.  
 * Add reprojection demo for both CAMA and nuScenes origin labels.  
-* **Note**: if using this older version, change ``self.map_width`` and ``self.map_height`` to 300 in [reproject.py](https://github.com/manymuch/CAMA/blob/main/cama/reproject.py#L26)
+
+## Prepare camav2 labels
+Download the [camav2_label.zip](https://drive.google.com/file/d/1zRZIB7BHKS_6sbC8oBA1mFe9_eaTMPs5/view?usp=sharing)
+
+```bash
+unzip camav2_label.zip
+
+cd camav2_label
+
+# create symlinks for 'site' reconstruction clips to the site2clip folder
+python site2clip.py
+```
+
+### Folder structure
+There are two kinds of labels
+* Clip mode (scmv): ```map_height = map_width = 300```
+* Site mode (mcmv): ```map_heigth = map_width = 600```
+
+The data is organized in the following format:
+
+```
+/camav2_labels/
+          |-- all_clips/
+          │       |-- scene-0001/
+          │       |   |-- maps/
+          │       |         |- map_labels.json
+          │       |         |- vision_road_mlp_ft.npy
+          │       |-- |-- odometry/                          # site mode
+          │       |         |- mcmv_camera_front_left.txt
+          │       |         |- mcmv_camera_front_right.txt
+          │       |         |- mcmv_camera_front.txt
+          │       |         |- mcmv_camera_rear_left.txt
+          │       |         |- mcmv_camera_rear_right.txt
+          │       |         |- mcmv_camera_rear.txt
+          │       |-- ...
+          │       |-- scene-1101/
+          │       |   |-- maps/
+          │       |         |- map_labels.json
+          │       |         |- vision_road_mlp_ft.npy
+          │       |-- |-- odometry/                          # clip mode
+          │       |         |- scmv_camera_front_left.txt
+          │       |         |- scmv_camera_front_right.txt
+          │       |         |- scmv_camera_front.txt
+          │       |         |- scmv_camera_rear_left.txt
+          │       |         |- scmv_camera_rear_right.txt
+          │       |         |- scmv_camera_rear.txt
+          |-- site2clip/
+          │       |   |-- bs_site01_map_labels.json
+          │       |   |-- bs_site01_vision_road_mlp_ft.npy
+          |       |   |-- ...
+          |-- site2clip.json
+          |-- site2clip.py
+```
 
 ## Run: Reprojection Demo  
 
@@ -30,17 +86,18 @@ CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.yout
     ```bash
     python3 -m pip install -r requirements.txt  
     ```
-2. Download camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
-
-3. Modify config.yaml accordingly:  
+2. Modify config.yaml accordingly:  
     * **dataroot**: path to the origin nuScenes dataset  
-    * **converted_dataroot**: output converted dataset dir  
-    * **cama_label_file**: path to cama_label.zip you just download from 2  
+    * **converted_dataroot**: path to camav2_labels directory 
     * **output_video_dir**: where the demo video writes
-4. Run the pipeline  
+    * **compute_metrics**: whether compute the evalutation metrics. 
+    
+3. Run the pipeline  
     ```bash
     python3 main.py --config config.yaml
     ```
+
+ _Note: To compute evaluation metrics, first generate the lane instance segmentation for each camera and place the results under ```scene-xxxx/lane_ins_{cam_name}```. Sample data is provided [here](https://drive.google.com/file/d/1IdnYEhDg5fmrgmZCAPzOSuI-BxJMQGtH/view?usp=sharing)._
 
 ## Citation
 

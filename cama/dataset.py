@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 from os.path import join, exists
 
@@ -6,13 +7,15 @@ from cama.dataset_reader import DatasetReader
 from cama.pose_transformer import PoseTransformer
 from cama.reproject import MapManager, CameraManager
 from cama.tools import load_json
+from cama.metric import MetricEvaluation
 
 
 class ClipManager:
-    def __init__(self, configs, clip_path=None):
+    def __init__(self, configs, clip_path=None, pose_prefix=None):
         self.configs = configs
-        self.mm = MapManager()
+        self.mm = MapManager(pose_prefix)
         self.instance_maps = dict()
+        self.pose_prefix = pose_prefix
         if clip_path is not None:
             self.clip_path = clip_path
             self.cm_list = self.prepare_camera_manager(clip_path)
@@ -60,8 +63,7 @@ class ClipManager:
     def get_pt_cama(self, dr):
         camera_main = self.configs["camera_main"]
         chassis2camera_main = dr.get_extrinsic("chassis", camera_main)
-        pose_prefix = self.configs["pose_prefix"]
-        camera_pose = dr.get_odometry(f"{pose_prefix}_{camera_main}.txt")
+        camera_pose = dr.get_odometry(f"{self.pose_prefix}_{camera_main}.txt")
         pt = PoseTransformer()
         pt.loadarray(camera_pose)
         pt.right_rotate(chassis2camera_main)
@@ -124,3 +126,61 @@ class ClipManager:
             render_image = cm.render_maps(image, maps_2d)
             render_image_dict[cm.camera_name] = render_image
         return render_image_dict
+
+    def render_sres(self, image_dict, sres_image_dict):
+        for camera_name, image in image_dict.items():
+            linestring_list_list = sres_image_dict[camera_name]
+            if linestring_list_list is None:
+                continue
+            for linestring_list in linestring_list_list:
+                for linestring in linestring_list:
+                    # plot linestring on image using cv2.line
+                    start_point = (int(linestring.coords[0][1]), int(linestring.coords[0][0]))
+                    end_point = (int(linestring.coords[-1][1]), int(linestring.coords[-1][0]))
+                    image = cv2.line(image, start_point, end_point, (0, 0, 255), 1)
+        return image_dict
+
+    def gather_errors(self, errors_dict):
+        error_dict = {}
+        for camera_name, errors in errors_dict.items():
+            if errors is None:
+                continue
+            mean_error = np.mean(errors)
+            error_dict[camera_name] = mean_error
+        return error_dict
+
+    def render_instance(self, image_dict, instances_dict):
+        for camera_name, image in image_dict.items():
+            instances = instances_dict[camera_name]
+            for semantic_id, masks in instances.items():
+                for mask in masks:
+                    image[mask] = [230, 170, 143]
+        return image_dict
+
+    def evaluate_all_camera(self, maps_2d_dict, image_idx):
+        evaluate_dict = {}
+        errors_dict = {}
+        instance_dict = {}
+        precisions_dict = {}
+        recalls_dict = {}
+        me = MetricEvaluation()
+
+        # iterate over camera
+        for cm in self.cm_list:
+
+            # read 2D instance segmentation
+            instances_png = cm.read_resized_instance_by_index(image_idx)
+            instances_mask = me.load_instance(instances_png)
+            vector_image = me.masks2skeleton(instances_mask)
+
+            # get projected vecotrs
+            vector_projected = maps_2d_dict[cm.camera_name]
+            vector_projected = me.vectors_float2int(vector_projected)
+
+            sres_vis, errors, precision, recall = me.calculate_sre(vector_image, vector_projected)
+            instance_dict[cm.camera_name] = instances_mask
+            evaluate_dict[cm.camera_name] = sres_vis
+            errors_dict[cm.camera_name] = errors
+            precisions_dict[cm.camera_name] = precision
+            recalls_dict[cm.camera_name] = recall
+        return evaluate_dict, errors_dict, instance_dict, precisions_dict, recalls_dict

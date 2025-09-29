@@ -3,3 +3,5 @@ tmp
 *.pyc
 __pycache__
 .DS_Store
+output
+camav2_label
