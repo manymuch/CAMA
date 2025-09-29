@@ -13,9 +13,13 @@ CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.yout
   <img src="assets/pipeline.jpg" width="70%"/>
 </p>
 
-## Release Notes  
+## Release Notes
+Please run ```git checkout camav2``` to switch to camav2 branch.
+### 2.1.0 (2025-09-29)
+* Release the evaluation scripts (SRE, precision, recall, F1-score).
+* Add LiDAR aggregation demo using CAMAv2 reconstructed poses.
 ### 2.0.0 (2024-07-31)
-* camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
+* camav2_label.zip [[Google Drive](https://drive.google.com/file/d/1zRZIB7BHKS_6sbC8oBA1mFe9_eaTMPs5/view?usp=sharing)]
 * CAMAv2 aggregates scenes with intersecting portions into one large scene called a **site**.
 * It solves the shortcoming of dropping head and tail frames in camav1.
 ### 1.0.0 (2023-10-13)  
@@ -30,7 +34,7 @@ CAMAv2： [Arxiv](https://arxiv.org/abs/2407.21331) | [Youtube](https://www.yout
     ```bash
     python3 -m pip install -r requirements.txt  
     ```
-2. Download camav2_labels.zip [[Google Drive](https://drive.google.com/file/d/1B-C6XyfnxfmHaKcp6U2Hygy-TpTmtQce/view?usp=sharing)]
+2. Download camav2_label.zip [[Google Drive](https://drive.google.com/file/d/1zRZIB7BHKS_6sbC8oBA1mFe9_eaTMPs5/view?usp=sharing)]
 
 3. Modify config.yaml accordingly:  
     * **dataroot**: path to the origin nuScenes dataset  
